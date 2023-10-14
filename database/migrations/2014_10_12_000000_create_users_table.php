@@ -19,6 +19,10 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->date('birth_date');
+            $table->string('address');
+            $table->unsignedBigInteger('phone');
+            $table->string('profession');
         });
     }
 
