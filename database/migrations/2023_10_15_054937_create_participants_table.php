@@ -17,8 +17,8 @@ return new class extends Migration
             $table->uuid('event_id');
             $table->timestamps();
 
-            $table->foreign('user_id')->on('users');
-            $table->foreign('event_id')->on('events');
+            $table->foreign('user_id')->on('users')->references('id');
+            $table->foreign('event_id')->on('events')->references('id');
         });
     }
 
