@@ -1,8 +1,7 @@
 <?php
 
-use App\Providers\RouteServiceProvider;
-
 use function Livewire\Volt\layout;
+use App\Providers\RouteServiceProvider;
 
 layout('layouts.guest');
 
@@ -15,9 +14,7 @@ $sendVerification = function () {
 
         return;
     }
-
     auth()->user()->sendEmailVerificationNotification();
-
     session()->flash('status', 'verification-link-sent');
 };
 
@@ -27,7 +24,7 @@ $logout = function () {
     session()->invalidate();
     session()->regenerateToken();
 
-    $this->redirect('/', navigate: true);
+    $this->redirect('/');
 };
 
 ?>
