@@ -1,19 +1,23 @@
 <?php
 
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
-use function Livewire\Volt\layout;
 use function Livewire\Volt\rules;
 use function Livewire\Volt\state;
+use function Livewire\Volt\layout;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
+use App\Providers\RouteServiceProvider;
 
 layout('layouts.guest');
 
 state([
     'name' => '',
     'email' => '',
+    'birth_date' => '',
+    'address' => '',
+    'phone' => '',
+    'profession' => '',
     'password' => '',
     'password_confirmation' => ''
 ]);
@@ -22,7 +26,12 @@ rules([
     'name' => ['required', 'string', 'max:255'],
     'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
     'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
-]);
+    'birth_date' => ['required', 'date'],
+    'address' => ['required', 'string', 'max:255'],
+    'phone' => ['required', 'numeric', 'min:10'],
+    'profession' => ['required', 'string', 'max:255']
+    
+]); 
 
 $register = function () {
     $validated = $this->validate();
@@ -33,7 +42,7 @@ $register = function () {
 
     auth()->login($user);
 
-    $this->redirect(RouteServiceProvider::HOME, navigate: true);
+    $this->redirect('/verify-email');
 };
 
 ?>
@@ -52,6 +61,34 @@ $register = function () {
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        </div>
+        
+        <!-- Birth Date -->
+        <div class="mt-4">
+            <x-input-label for="birth_date" :value="__('Birth date')" />
+            <x-text-input wire:model="birth_date" id="birth_date" class="block mt-1 w-full" type="date" name="birth_date" required />
+            <x-input-error :messages="$errors->get('birth_date')" class="mt-2" />
+        </div>
+
+        <!-- Address -->
+        <div class="mt-4">
+            <x-input-label for="address" :value="__('Address')" />
+            <x-text-input wire:model="address" id="address" class="block mt-1 w-full" type="text" name="address" required />
+            <x-input-error :messages="$errors->get('address')" class="mt-2" />
+        </div>
+
+        <!-- Phone -->
+        <div class="mt-4">
+            <x-input-label for="phone" :value="__('Phone')" />
+            <x-text-input wire:model="phone" id="phone" class="block mt-1 w-full" type="tel" name="phone" required />
+            <x-input-error :messages="$errors->get('phone')" class="mt-2" />
+        </div>
+        
+        <!-- Profession -->
+        <div class="mt-4">
+            <x-input-label for="profession" :value="__('Profession')" />
+            <x-text-input wire:model="profession" id="profession" class="block mt-1 w-full" type="text" name="profession" required />
+            <x-input-error :messages="$errors->get('profession')" class="mt-2" />
         </div>
 
         <!-- Password -->
