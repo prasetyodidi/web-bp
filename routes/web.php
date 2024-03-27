@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Livewire\Volt\Volt;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,5 +23,9 @@ Route::view('dashboard', 'dashboard')
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
+
+Route::view('landing-page', 'landing-page');
+
+Volt::route('blogs', 'pages.blogs')->name('blogs');
 
 require __DIR__.'/auth.php';
