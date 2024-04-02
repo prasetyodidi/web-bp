@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
-use App\Models\Post;
 
 class PostController extends Controller
 {
@@ -26,10 +26,11 @@ class PostController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * need post_category, category and post it self
      */
     public function store(StorePostRequest $request)
     {
-        //
+        
     }
 
     /**
