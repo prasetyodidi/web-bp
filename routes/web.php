@@ -1,5 +1,12 @@
 <?php
 
+use Livewire\Volt\Volt;
+use App\Models\Category;
+use App\Livewire\Blog\MyBlog;
+use App\Livewire\Blog\EditBlog;
+use App\Livewire\Blog\ReadBlog;
+use App\Livewire\Blog\ViewBlog;
+use App\Livewire\Blog\CreateBlog;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -23,9 +30,13 @@ Route::view('dashboard', 'dashboard')
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
-
-Route::view('landing-page', 'landing-page');
-
-Volt::route('blogs', 'pages.blogs')->name('blogs');
-
+Route::prefix('blog')->middleware('auth')->group(function() {
+    Route::get('my-post', MyBlog::class);
+    Route::get('create', CreateBlog::class)->name('blog.create');
+    Route::get('edit/{id}', EditBlog::class)->name('blog.edit');
+});
+Route::prefix('blog')->group(function() {
+    Route::get('/', ViewBlog::class)->name("blog");
+    Route::get('read/{id}', ReadBlog::class);
+});
 require __DIR__.'/auth.php';
