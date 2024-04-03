@@ -10,7 +10,7 @@ use function Livewire\Volt\layout;
 use function Livewire\Volt\rules;
 use function Livewire\Volt\state;
 
-layout('layouts.guest');
+layout('layouts.base');
 
 state(['email' => '', 'password' => '', 'remember' => false]);
 
@@ -23,7 +23,7 @@ rules([
 $login = function () {
     $this->validate();
 
-    $throttleKey = Str::transliterate(Str::lower($this->email).'|'.request()->ip());
+    $throttleKey = Str::transliterate(Str::lower($this->email) . '|' . request()->ip());
 
     if (RateLimiter::tooManyAttempts($throttleKey, 5)) {
         event(new Lockout(request()));
@@ -38,7 +38,7 @@ $login = function () {
         ]);
     }
 
-    if (! auth()->attempt($this->only(['email', 'password'], $this->remember))) {
+    if (!auth()->attempt($this->only(['email', 'password'], $this->remember))) {
         RateLimiter::hit($throttleKey);
 
         throw ValidationException::withMessages([
@@ -50,15 +50,12 @@ $login = function () {
 
     session()->regenerate();
 
-    $this->redirect(
-        session('url.intended', RouteServiceProvider::HOME),
-        navigate: true
-    );
+    $this->redirect(session('url.intended', RouteServiceProvider::HOME), navigate: true);
 };
 
 ?>
 
-<div>
+{{-- <div>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -102,4 +99,49 @@ $login = function () {
             </x-primary-button>
         </div>
     </form>
-</div>
+</div> --}}
+
+<main class="flex flex-row h-screen overflow-hidden">
+    <div class="w-3/5 flex flex-col items-center px-8 bg-primary-blue pt-12">
+        <div class="flex flex-col gap-4 text-white">
+            <h1 class="text-4xl font-semibold">Welcome to bakaranrpoject</h1>
+            <div class="flex flex-col items-center text-md">
+                <span>Lorem ipsum dolor sit amet,</span>
+                <span>consectetur adipiscing elit, sed do </span>
+            </div>
+        </div>
+        <img src="/images/hero-image.png" alt="image" class="w-full h-auto" />
+    </div>
+    <div class="w-2/5 bg-white flex flex-col items-center px-8 pt-12 font-semibold gap-8">
+        <div class="flex flex-col items-center gap-4">
+            <h1 class="text-4xl text-primary-blue">Hello Again</h1>
+            <div class="flex flex-col text-slate-400 items-center">
+                <span>Lorem ipsum dolor sit amet,</span>
+                <span>consectetur adipiscing elit, sed do </span>
+            </div>
+        </div>
+        <form class="flex flex-col w-full gap-4" wire:submit.prevent="login">
+            <x-auth-session-status class="mb-4" :status="session('status')" />
+            <input wire:model="email" type="email" id="email" name="email" placeholder="Email"
+                class="rounded-full bg-slate-100 px-4 py-2 text-primary-blue focus:outline-none focus:border-primary-blue focus:ring-2 focus:ring-primary-blue">
+            <x-input-error :messages="$errors->get('email')"/>
+            <input wire:model="password" type="password" id="password" name="password" placeholder="Password"
+                class="rounded-full bg-slate-100 px-4 py-2 text-primary-blue focus:outline-none focus:border-primary-blue focus:ring-2 focus:ring-primary-blue">
+            <x-input-error :messages="$errors->get('password')" />
+            <div class="flex flex-row justify-between text-primary-blue">
+                <label for="isRemember">
+                    <input wire:model="isRemember" type="checkbox" id="isRemember" name="isRemember">
+                    Remember me?
+                </label>
+                <a href="#">Forgot password?</a>
+            </div>
+            <button type="submit" class="bg-primary-blue rounded-full py-2 text-white">Login</button>
+            <button type="button" class="border-primary-blue border-2 py-2 rounded-full text-primary-blue">
+                Sign in with Google
+            </button>
+            <span class="text-primary-blue text-center">
+                Don’t have an account, <a href="#">register here.</a>
+            </span>
+        </form>
+    </div>
+</main>
