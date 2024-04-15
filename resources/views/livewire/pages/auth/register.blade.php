@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
 
-layout('layouts.guest');
+layout('layouts.base');
 
 state([
     'name' => '',
@@ -19,12 +19,12 @@ state([
     'phone' => '',
     'profession' => '',
     'password' => '',
-    'password_confirmation' => ''
+    'password_confirmation' => '',
 ]);
 
 rules([
     'name' => ['required', 'string', 'max:255'],
-    'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+    'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
     'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
     'birth_date' => ['required', 'date'],
     'address' => ['required', 'string', 'max:255'],
@@ -38,7 +38,7 @@ $register = function () {
 
     $validated['password'] = Hash::make($validated['password']);
 
-    event(new Registered($user = User::create($validated)));
+    event(new Registered(($user = User::create($validated))));
 
     auth()->login($user);
 
@@ -47,7 +47,7 @@ $register = function () {
 
 ?>
 
-<div>
+{{-- <div>
     <form wire:submit="register">
         <!-- Name -->
         <div>
@@ -124,4 +124,46 @@ $register = function () {
             </x-primary-button>
         </div>
     </form>
-</div>
+</div> --}}
+
+<!-- resources/views/livewire/register-page.volt -->
+
+<main class="flex flex-row h-screen">
+    <div class="w-3/5 flex flex-col items-center px-8 bg-primary-blue pt-12">
+        <div class="flex flex-col gap-4 text-white">
+            <h1 class="text-4xl font-semibold">Welcome to bakaranrpoject</h1>
+            <div class="flex flex-col items-center text-md">
+                <span>Lorem ipsum dolor sit amet,</span>
+                <span>consectetur adipiscing elit, sed do </span>
+            </div>
+        </div>
+        <img src="/images/hero-image.png" alt="image" />
+    </div>
+    <div class="w-2/5 bg-white flex flex-col items-center px-8 pt-12 font-semibold gap-8">
+        <div class="flex flex-col items-center gap-4">
+            <h1 class="text-4xl text-primary-blue">Hello</h1>
+            <div class="flex flex-col text-slate-400 items-center">
+                <span>Lorem ipsum dolor sit amet,</span>
+                <span>consectetur adipiscing elit, sed do </span>
+            </div>
+        </div>
+        <form class="flex flex-col w-full gap-4" wire:submit.prevent="register">
+            <input wire:model="name" type="text" id="name" name="name" placeholder="Name"
+                class="rounded-full bg-slate-100 px-4 py-2 text-primary-blue focus:outline-none focus:border-primary-blue focus:ring-2 focus:ring-primary-blue">
+            <input wire:model="email" type="email" id="email" name="email" placeholder="Email"
+                class="rounded-full bg-slate-100 px-4 py-2 text-primary-blue focus:outline-none focus:border-primary-blue focus:ring-2 focus:ring-primary-blue">
+            <input wire:model="password" type="password" id="password" name="password" placeholder="Password"
+                class="rounded-full bg-slate-100 px-4 py-2 text-primary-blue focus:outline-none focus:border-primary-blue focus:ring-2 focus:ring-primary-blue">
+            <input wire:model="confirmPassword" type="password" id="confirmPassword" name="confirmPassword"
+                placeholder="Confirm password"
+                class="rounded-full bg-slate-100 px-4 py-2 text-primary-blue focus:outline-none focus:border-primary-blue focus:ring-2 focus:ring-primary-blue">
+            <button type="submit" class="bg-primary-blue rounded-full py-2 text-white">Register</button>
+            <button type="button" class="border-primary-blue border-2 py-2 rounded-full text-primary-blue">
+                Sign in with Google
+            </button>
+            <span class="text-primary-blue text-center">
+                Already have an account, <a href="#">Login here.</a>
+            </span>
+        </form>
+    </div>
+</main>
