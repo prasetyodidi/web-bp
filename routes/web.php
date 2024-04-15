@@ -1,14 +1,11 @@
 <?php
 
-use Livewire\Volt\Volt;
-use App\Models\Category;
 use App\Livewire\Blog\MyBlog;
 use App\Livewire\Blog\EditBlog;
 use App\Livewire\Blog\ReadBlog;
 use App\Livewire\Blog\ViewBlog;
 use App\Livewire\Blog\CreateBlog;
 use Illuminate\Support\Facades\Route;
-use Livewire\Volt\Volt;
 
 /*
 |--------------------------------------------------------------------------
