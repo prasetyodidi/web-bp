@@ -30,12 +30,12 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 Route::prefix('blog')->middleware('auth')->group(function() {
-    Route::get('my-post', MyBlog::class);
+    Route::get('my-post', MyBlog::class)->name('my.blog');
     Route::get('create', CreateBlog::class)->name('blog.create');
     Route::get('edit/{id}', EditBlog::class)->name('blog.edit');
 });
 Route::prefix('blog')->group(function() {
     Route::get('/', ViewBlog::class)->name("blog");
-    Route::get('read/{id}', ReadBlog::class);
+    Route::get('read/{id}', ReadBlog::class)->name('read.blog');
 });
 require __DIR__.'/auth.php';

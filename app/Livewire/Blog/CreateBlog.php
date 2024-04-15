@@ -41,7 +41,7 @@ class CreateBlog extends Component
             'post_id' => $post->id,
             'category_id' => $this->category
         ]);
-        return redirect()->to('blog');
+        $this->redirect('/');
     }
     
     #[Layout('layouts.app')] 
