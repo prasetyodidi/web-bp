@@ -20,5 +20,6 @@ class MyBlog extends Component
     }
     public function deletePost($id) {
         Post::where('id', $id)->delete();
+        return redirect()->route('my.blog');
     }
 }

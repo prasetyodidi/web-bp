@@ -3,6 +3,7 @@
 namespace App\Livewire\Blog;
 
 use App\Models\Post;
+use App\Models\Comment;
 use Livewire\Component;
 use App\Models\PostLike;
 use App\Models\PostDislike;
@@ -18,6 +19,8 @@ class ViewBlog extends Component
     
     public $status;
 
+    public $message;
+
     public function Like($idPost){
         if(auth()->guest()) {
             return $this->redirectRoute('login');
@@ -29,13 +32,11 @@ class ViewBlog extends Component
         
         if($like) {
             PostLike::where('post_id', $idPost)->where('owner_id', $user->id)->delete();
-            session()->flash('status', 'Anda sudah menghapus like di postingan ini.');
         } else {
             PostLike::create([
                 'post_id' => $idPost,
                 'owner_id' => auth()->user()->id,
             ]);
-            session()->flash('status', 'Anda sudah like di postingan ini.');
         }
     }
     
@@ -48,7 +49,6 @@ class ViewBlog extends Component
         $post = PostDislike::where('post_id', $idPost)->where('owner_id', $user->id)->first();
         if($post) {
             PostDislike::where('post_id', $idPost)->where('owner_id', $user->id)->delete();
-            session()->flash('status', 'Anda sudah menyukai postingan ini.');
         } else {
             PostDislike::create([
                 'post_id' => $idPost,
@@ -57,12 +57,14 @@ class ViewBlog extends Component
         }
     }
     
+
     
     #[Layout('layouts.PublicAccess')] 
     public function render()
     {
         return view('livewire.blog.view-blog', [
             'posts' => Post::with('likes')->with('dislikes')->paginate(9),
+            'comments' => Comment::where('post_id', )
         ]);
     }
 }
