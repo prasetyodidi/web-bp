@@ -23,6 +23,7 @@ export default {
                 "primary-blue": "#5A79A8",
                 "secondary-blue": "#7EA5E0",
                 "third-blue": "#3F5370",
+                "steelblue": "#7195CA",
                 "primary-green": "#86E3CE",
                 "primary-red": "#FE8A8A",
             },

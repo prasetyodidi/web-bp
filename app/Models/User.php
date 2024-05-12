@@ -83,7 +83,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(PostDislike::class, 'owner_id', 'id');
     }
 
-    public function isDisiked(Post $post)
+    public function isDisliked(Post $post)
     {
         return $this->postDisikes->contains('post_id', $post->id);
     }

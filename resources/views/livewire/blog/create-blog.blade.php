@@ -1,33 +1,18 @@
-<div class="max-w-3xl mx-auto p-9 bg-gray-800 rounded-md shadow-md my-16">
-    <h2 class="text-2xl font-semibold text-white mb-6">Create New Post</h2>
-    <form wire:submit="save">
-        
-        <div class="mb-4">
-            <label for="title" class="block text-gray-300 text-sm font-bold mb-2">Title</label>
-            <input type="text" id="title" wire:model="title" required class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500 bg-gray-700 text-white">
-            @error('title') <span class="text-white"> {{$message}} </span> @enderror
-        </div>
-        <div class="mb-4">
-            <label for="cover" class="block text-gray-300 text-sm font-bold mb-2">Cover</label>
-            <input type="file" wire:model="cover" required class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500 bg-gray-700 text-white">
-            @error('cover') <span class="text-white"> {{$message}} </span> @enderror
-        </div>
-        <div class="mb-4">
-            <select wire:model.live="category" class="w-32 px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500 bg-gray-700 text-white">
-                <option value="" disabled="disabled" selected > Category </option>
-                @foreach ($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="mb-6">
-            <!-- TODO using CKEditor / WYSIWYG -->
-            <label for="content" class="block text-gray-300 text-sm font-bold mb-2">Content</label>
-            <textarea id="content" wire:model="content" rows="4" placeholder="Your content" required class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500 bg-gray-700 text-white"></textarea>
-            @error('content') <span class="text-white" > {{$message}} </span> @enderror
-        </div>
-        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue">
-            Send Message
-        </button>
-    </form>
+<div class="ml-8 mt-6">
+    <p class="text-5xl font-bold text-left text-third-blue flex-row">Create Post</p>
+    <hr class="bg-third-blue w-64 h-1">
+    <div class="gap-4">
+
+        <form wire:submit="save">
+            <div>
+                <input class="w-32 h-32" type="file" name="cover" id="cover">
+                <label for="cover" class="bg-steelblue">Drag & Drop file or browse in your computer</label>
+            </div>
+            <div>
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title">
+            </div>
+            <button type="submit"></button>
+        </form>
+    </div>
 </div>

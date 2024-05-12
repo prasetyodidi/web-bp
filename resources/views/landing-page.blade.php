@@ -18,7 +18,7 @@
             <div class="w-full min-h-screen flex flex-row justify-center items-center bg-primary-blue rounded-b-[24px]">
               @include('components.landingpage.header')
               <div class='absolute top-4 flex flex-col items-center gap-4'>
-                <h1 class='mt-20 text-center text-4xl hover:cursor-pointer'>A Digital Team That Make<br>Everything <span class='underline decoration-4 decoration-primary-green'>Creatively</span></h1>
+                <h1 class='mt-20 text-center text-4xl text-white hover:cursor-pointer'>A Digital Team That Make<br>Everything <span class='underline decoration-4 text-primary-green decoration-primary-green'>Creatively</span></h1>
                 <button class='bg-blue-400 text-white px-6 py-2 rounded-full'>Learn More</button>
               </div>
               <img src="/images/hero-image.png" alt="hero image" />

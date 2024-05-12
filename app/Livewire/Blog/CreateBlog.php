@@ -10,20 +10,20 @@ use Livewire\WithFileUploads;
 use Livewire\Attributes\Layout;
 
 class CreateBlog extends Component
-{ 
+{
     use WithFileUploads;
 
-    public $title; 
-    public $cover; 
+    public $title;
+    public $cover;
     public $content;
-    
+
     public $categories;
     public $category;
     public function mount()
     {
         $this->categories = Category::all();
     }
-    
+
     public function save() {
         $this->validate([
             'title' => 'required',
@@ -43,8 +43,8 @@ class CreateBlog extends Component
         ]);
         $this->redirect('/');
     }
-    
-    #[Layout('layouts.app')] 
+
+    #[Layout('layouts.dashboardnav')]
     public function render()
     {
         return view('livewire.blog.create-blog');
