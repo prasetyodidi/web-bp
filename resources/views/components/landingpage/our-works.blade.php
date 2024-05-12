@@ -33,9 +33,23 @@
                     tempor incididunt</p>
             </div>
         </div> --}}
-        <div class='flex flex-col h-96 w-96 rounded-[1rem] shadow-2xl'>
+        {{-- <div class='flex flex-col h-96 w-96 rounded-[1rem] shadow-2xl'>
             <div class='relative h-1/2 flex flex-row  justify-between rounded-t-[1rem] bg-primary-red px-4'>
                 <img src="/images/work-design.png" alt='ornament design' />
+                {{-- <div class='flex flex-col justify-between w-full items-center my-8'>
+                    <h2 class='text-3xl text-white font-semibold'>Example</h2>
+                    <h2 class='text-3xl text-white font-semibold'>Graphic</h2>
+                    <h2 class='text-3xl text-white font-semibold'>Design</h2>
+                </div> 
+            </div>
+            <div class='p-8'>
+                <h2 class='text-3xl font-semibold text-slate-900'>Dwno js P5</h2>
+                <p class='text-slate-500'>Quiz + Runner game what else</p>
+            </div>
+        </div> --}}
+        <div class='flex flex-col h-96 w-96 rounded-[1rem] shadow-2xl'>
+            <div class='relative h-1/2 flex flex-row  justify-center rounded-t-[1rem] px-4'>
+                <img src="/images/qr-voting.png" alt='ornament design' />
                 {{-- <div class='flex flex-col justify-between w-full items-center my-8'>
                     <h2 class='text-3xl text-white font-semibold'>Example</h2>
                     <h2 class='text-3xl text-white font-semibold'>Graphic</h2>
@@ -48,8 +62,8 @@
             </div>
         </div>
         <div class='flex flex-col h-96 w-96 rounded-[1rem] shadow-2xl'>
-            <div class='relative h-1/2 flex flex-row  justify-between rounded-t-[1rem] bg-primary-red px-4'>
-                <img src="/images/work-design.png" alt='ornament design' />
+            <div class='relative h-1/2 flex flex-row justify-center rounded-t-[1rem] px-4'>
+                <img src="/images/qr-game.png" alt='ornament design' />
                 {{-- <div class='flex flex-col justify-between w-full items-center my-8'>
                     <h2 class='text-3xl text-white font-semibold'>Example</h2>
                     <h2 class='text-3xl text-white font-semibold'>Graphic</h2>
