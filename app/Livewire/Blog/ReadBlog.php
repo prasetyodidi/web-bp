@@ -12,11 +12,13 @@ class ReadBlog extends Component
     public $post;
     public $comments;
     public $message;
-    public function mount($id) {
-        $this->post = Post::where('id', $id)->first();
+    public function mount($id)
+    {
+        $this->post = Post::where('id', $id)->with('owner')->first();
         $this->comments = Comment::where('post_id', $id)->get();
     }
-    public function newComment($idPost){
+    public function newComment($idPost)
+    {
         if(auth()->guest()) {
             return $this->redirectRoute('login');
         }
@@ -33,7 +35,7 @@ class ReadBlog extends Component
     }
 
 
-    #[Layout('layouts.PublicAccess')] 
+    #[Layout('layouts.header')]
     public function render()
     {
         return view('livewire.blog.read-blog');
