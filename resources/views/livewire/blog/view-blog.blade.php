@@ -47,8 +47,6 @@
                     </a>
                     <p>{{ Str::limit($post->content, 50) }}</p>
                 </div>
-                {{-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, neque!</p> --}}
-                {{-- <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga mollitia minima tenetur excepturi laborum maxime autem, minus cum odio saepe!</p> --}}
                 <div class="flex justify-between">
                     @foreach ($post->tags as $tag)
                         <button disabled class="w-20 rounded-md bg-third-blue text-white">{{ $tag->name }}</button>
@@ -56,24 +54,6 @@
                 </div>
             </div>
         @endforeach
-        {{-- <div class="flex-col">
-            <img src="https://dummyimage.com/320x200/000/fff" alt="">
-            <div class="flex gap-2 w-[300px]">
-                <p class="text-lg">Bakaran Project</p>
-                <p class="text-lg">•</p>
-                <p class="text-lg">2024-01-01</p>
-            </div>
-            <div class="w-[300px]">
-                <p>Lorem ipsum dolor sit amet.</p>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Blanditiis, eligendi.</p>
-            </div>
-            {{-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, neque!</p> --}}
-        {{-- <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga mollitia minima tenetur excepturi laborum maxime autem, minus cum odio saepe!</p> --}}
-        {{-- <div class="flex justify-between">
-                <button class="w-20 rounded-none bg-third-blue text-white">Aw</button>
-                <button class="w-20 rounded-none bg-third-blue text-white">Aw</button>
-                <button class="w-20 rounded-none bg-third-blue text-white">Aw</button>
-            </div>
-        </div> --}}
+
     </div>
 </div>

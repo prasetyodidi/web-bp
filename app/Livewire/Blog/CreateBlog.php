@@ -2,12 +2,14 @@
 
 namespace App\Livewire\Blog;
 
-use App\Models\Post;
-use Livewire\Component;
 use App\Models\Category;
+use App\Models\Post;
 use App\Models\PostCategory;
-use Livewire\WithFileUploads;
+use App\Models\PostTag;
+use App\Models\Tag;
 use Livewire\Attributes\Layout;
+use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class CreateBlog extends Component
 {
@@ -16,37 +18,66 @@ class CreateBlog extends Component
     public $title;
     public $cover;
     public $content;
+    public $selectedTag = [];
+    public $currentStep = 1;
+    public $totalStep = 2;
+    public $selectedCategory = [];
+    protected $listeners = ['nextStep', 'save'];
 
-    public $categories;
-    public $category;
-    public function mount()
+    public function validateForm()
     {
-        $this->categories = Category::all();
+        if ($this->currentStep == 1) {
+            $this->validate([
+                'title' => 'required',
+                'cover' => 'required|image|max:2048',
+                'content' => 'required',
+            ]);
+        }
     }
 
-    public function save() {
+    public function nextStep()
+    {
+        // $this->validateForm();
+        if ($this->currentStep < $this->totalStep) {
+            $this->currentStep++;
+        }
+        $this->dispatch('next-step');
+    }
+
+    public function save()
+    {
         $this->validate([
-            'title' => 'required',
-            'cover' => 'required|image|max:2048',
-            'content' => 'required',
+            'selectedCategory' => 'required|array|min:1',
+            'selectedTag' => 'required|array|min:1',
         ]);
-        $file = $this->cover->store('images','public');
+        $file = $this->cover->store('images', 'public');
         $post = Post::create([
             'owner_id' => auth()->user()->id,
             'title' => $this->title,
             'cover' => $file,
             'content' => $this->content,
         ]);
-        PostCategory::create([
-            'post_id' => $post->id,
-            'category_id' => $this->category
-        ]);
+        foreach ($this->selectedCategory as $categoryId) {
+            PostCategory::create([
+                'post_id' => $post->id,
+                'category_id' => $categoryId,
+            ]);
+        }
+        foreach ($this->selectedTag as $tagId) {
+            PostTag::create([
+                'post_id' => $post->id,
+                'tag_id' => $tagId,
+            ]);
+        }
         $this->redirect('/');
     }
 
     #[Layout('layouts.dashboardnav')]
     public function render()
     {
-        return view('livewire.blog.create-blog');
+        return view('livewire.blog.create-blog')->with([
+            'tags' => Tag::all(),
+            'categories' => Category::all()
+        ]);
     }
 }

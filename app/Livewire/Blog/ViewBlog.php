@@ -65,7 +65,6 @@ class ViewBlog extends Component
     {
         return view('livewire.blog.view-blog', [
             'posts' => Post::with('likes')->with('dislikes')->with('owner')->paginate(6),
-            // 'feature_post' => Post::
             'tags' => Tag::all()
         ]);
     }
