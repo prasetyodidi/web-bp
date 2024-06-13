@@ -14,34 +14,43 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+    <script
+        src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
 
 <body class="font-sans antialiased">
-<div class="md:flex flex-row w-[15%]">
+<div class="md:flex flex-col md:flex-row md:min-h-max w-[15%]">
     <div class="flex flex-col w-full h-screen md:w-64 text-gray-700 bg-third-blue flex-shrink-0">
         <div class="flex-shrink-0 px-8 py-4 flex flex-row items-center justify-between">
             <a href="#"
-               class="text-lg font-semibold tracking-widest text-white uppercase rounded-lg focus:outline-none focus:shadow-outline">Bakaran
-                Project</a>
+               class="text-lg font-semibold tracking-widest text-white rounded-lg focus:outline-none focus:shadow-outline">Bakaran
+                project</a>
         </div>
         <nav class="flex-grow md:block px-4 pb-4 md:pb-0 md:overflow-y-auto">
             <div class="flex flex-col justify-center h-full">
-                <a class="block px-4 py-2 mt-2 text-sm font-semibold text-white rounded-lg dark-mode:focus:bg-gray-600 hover:text-white focus:text-white hover:bg-gray-500 focus:bg-gray-500 focus:outline-none focus:shadow-outline"
-                   href="#">Insight</a>
-                <a class="block px-4 py-2 mt-2 text-sm font-semibold text-white bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:bg-gray-600 hover:text-white focus:text-white hover:bg-gray-500 focus:bg-gray-500 focus:outline-none focus:shadow-outline"
-                   href="#">Posts</a>
-                <a class="block px-4 py-2 mt-2 text-sm font-semibold text-white bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:bg-gray-600 hover:text-white focus:text-white hover:bg-gray-500 focus:bg-gray-500 focus:outline-none focus:shadow-outline"
+                <a class="block px-4 py-2 mt-2 text-sm font-semibold rounded-lg focus:outline-none focus:shadow-outline
+                        {{ request()->is('dashboard') ? 'text-white bg-gray-500' : 'text-white bg-transparent' }}"
+                   href="{{ route('dashboard') }}">Insight</a>
+                <a class="block px-4 py-2 mt-2 text-sm font-semibold rounded-lg focus:outline-none focus:shadow-outline
+                        {{ request()->is('blog/*') ? 'text-white bg-gray-500' : 'text-white bg-transparent' }}"
+                   href="{{ route('my.blog') }}">Posts</a>
+                <a class="block px-4 py-2 mt-2 text-sm font-semibold rounded-lg focus:outline-none focus:shadow-outline
+                        ' text-white bg-transparent"
                    href="#">New Project</a>
-                <a class="block px-4 py-2 mt-2 text-sm font-semibold text-white bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:bg-gray-600 hover:text-white focus:text-white hover:bg-gray-500 focus:bg-gray-500 focus:outline-none focus:shadow-outline"
+                <a class="block px-4 py-2 mt-2 text-sm font-semibold rounded-lg focus:outline-none focus:shadow-outline
+                        ' text-white bg-transparent"
                    href="#">Event</a>
             </div>
         </nav>
     </div>
-    <div>
-        <main class="w-screen h-screen">
-            {{$slot}}
-        </main>
-    </div>
+    <main class="w-max h-screen">
+        {{ $slot }}
+
+    </main>
 </div>
 </body>
 

@@ -32,7 +32,7 @@ class Post extends Model
     }
     public function categories(): BelongsToMany
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class, 'post_category', 'post_id', 'category_id');
     }
 
     public function userLikes(): BelongsToMany
