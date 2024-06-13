@@ -3,7 +3,7 @@
     <p class="text-lg lg:text-3xl sm-max:text-center text-slate-600 font-semibold">
         Some of the projects we have made recently
     </p>
-    <div class='flex flex-col max-sm:px-5 lg:flex-row justify-between gap-24'>
+    <div class='flex flex-row max-sm:px-5 lg:flex-row md:flex-col justify-between gap-24'>
         {{--        <div class='flex flex-col h-96 rounded-[1rem] shadow-2xl'>--}}
         {{--            <div class='relative h-1/2 flex flex-row rounded-t-[1rem] bg-primary-green'>--}}
         {{--                <img src="/images/ornament-3.png" alt='just an ornament' class='absolute top-0 left-0'/>--}}

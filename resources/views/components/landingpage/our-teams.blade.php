@@ -1,7 +1,7 @@
 <div id="our-works"
      class="relative overflow-hidden min-h-screen flex flex-col gap-8 items-center px-24 bg-secondary-blue">
     <img src="/images/ornament-big.svg" alt='ornament' class='absolute -bottom-96'/>
-    <h1 class="text-4xl text-white font-bold">Our Works</h1>
+    <h1 class="text-4xl text-white font-bold">Our Teams</h1>
     <p class="text-xl text-slate-900">
         Our team members who are very cool and talented
     </p>
